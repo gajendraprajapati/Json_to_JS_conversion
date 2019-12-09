@@ -1,0 +1,700 @@
+{
+  "HEADER": {
+    "APPLICATION-ID": "27401003088",
+    "CUSTOMER-ID": "27401003088",
+    "INSTITUTION-ID": "4045",
+    "REQUEST-TIME": "Tue Apr 30 12:49:15 IST 2019",
+    "REQUEST-TYPE": "Tue Apr 30 12:49:15 IST 2019",
+    "APP-TYPE": "01"
+  },
+  "REQUEST": {
+    "manualBre": false,
+    "sRefID": "27401003088",
+    "oHeader": {
+      "sAppID": "1904308U5LD3",
+      "sInstID": "4045",
+      "sSourceID": "GONOGO_TEST",
+      "sAppSource": "Android:4.04.04",
+      "sReqType": "application/json",
+      "dtSubmit": 1556608746099,
+      "sDsaId": "SM13078",
+      "sDealerId": "27401",
+      "sProduct": "CDL",
+      "oDeviceInfo": {
+        "sIpAddress": "103.48.103.109",
+        "oBrowserDetails": {
+          "sBrowserName": "Unknown"
+        },
+        "oOsDetails": {
+          "sOS": "Lollipop",
+          "sMacAddress": "60:8E:08:C4:E5:F8"
+        },
+        "sIMEI": "358520071989201",
+        "sDeviceID": "1f5fb92d2c92ab31",
+        "sDeviceManufacturer": "samsung",
+        "sDeviceModel": "SM-T116IR",
+        "oGeoLocation": {
+          "dLtd": 19.2420036,
+          "dLnge": 73.1487183
+        }
+      },
+      "sUserName": "CTEST80890",
+      "dtAppDate": 1556608745471
+    },
+    "oReq": {
+      "oApplicant": {
+        "karzaKycSkipped": false,
+        "residenceAddSameAsAbove": false,
+        "aadhaarDetailsSameAsExisting": false,
+        "resiCumOffice": false,
+        "sApplID": "APPLICANT_1",
+        "oApplName": {
+          "sFirstName": "ESADFS",
+          "sMiddleName": "ASDFASDF",
+          "sLastName": "ASDFASDF"
+        },
+        "sApplGndr": "Male",
+        "sDob": "28091983",
+        "iAge": 35,
+        "sMarStat": "Married",
+        "aKycDocs": [
+          {
+            "sKycName": "PAN",
+            "sKycNumber": "ASDFAH0316B",
+            "bDocumentVerified": true
+          }
+        ],
+        "bSameAbove": false,
+        "aAddr": [
+          {
+            "sLine1": "123, ASFASF ASFADFA ADSF",
+            "sLine2": "GANDHARI RD",
+            "sCity": "ASDASDF",
+            "iPinCode": 421301,
+            "sState": "ASDFASF",
+            "sCountry": "India",
+            "sLine3": "ASDFAS WEST",
+            "fDistFrom": 0,
+            "sLandMark": "ASDFASD ROAD",
+            "sOutOfGeoLimit": "NO",
+            "iTimeAtAddr": 0,
+            "sAddrType": "RESIDENCE",
+            "iMonthAtCity": 0,
+            "iMonthAtAddr": 0,
+            "dRentAmt": 0,
+            "iYearAtCity": 0,
+            "bNegativeAreaNotApplicableFlag": false,
+            "dLatitude": 0,
+            "dLongitude": 0,
+            "sCityType": "Metro",
+            "sTier": "1",
+            "inoOfYearsAtResidence": 0,
+            "sResAddrType": "",
+            "sAogl": ""
+          },
+          {
+            "iPinCode": 0,
+            "fDistFrom": 0,
+            "iTimeAtAddr": 0,
+            "sAddrType": "PERMANENT",
+            "iMonthAtCity": 0,
+            "iMonthAtAddr": 0,
+            "dRentAmt": 0,
+            "iYearAtCity": 0,
+            "bNegativeAreaNotApplicableFlag": false,
+            "dLatitude": 0,
+            "dLongitude": 0,
+            "inoOfYearsAtResidence": 0
+          },
+          {
+            "iPinCode": 400001,
+            "sCountry": "India",
+            "fDistFrom": 0,
+            "iTimeAtAddr": 0,
+            "sAddrType": "OFFICE",
+            "iMonthAtCity": 0,
+            "iMonthAtAddr": 0,
+            "dRentAmt": 0,
+            "iYearAtCity": 0,
+            "bNegativeAreaNotApplicableFlag": false,
+            "dLatitude": 0,
+            "dLongitude": 0,
+            "inoOfYearsAtResidence": 0,
+            "sLine1": "ASDFASDF OF RAILWAY STATION",
+            "sLine2": "ASFASDF",
+            "sCity": "ASD",
+            "sState": "MAHARASHTRA",
+            "sLine3": "ASDFAS DC"
+          }
+        ],
+        "aPhone": [
+          {
+            "sPhoneType": "PERSONAL_MOBILE",
+            "sCountryCode": "+91",
+            "sPhoneNumber": "9999999999",
+            "sAreaCode": "",
+            "sExt": ""
+          },
+          {
+            "sPhoneType": "PERSONAL_PHONE",
+            "sAreaCode": "",
+            "sCountryCode": "+91",
+            "sPhoneNumber": "",
+            "sExt": ""
+          },
+          {
+            "sPhoneType": "RESIDENCE_MOBILE",
+            "sAreaCode": "",
+            "sCountryCode": "+91",
+            "sPhoneNumber": "",
+            "sExt": ""
+          },
+          {
+            "sPhoneType": "OFFICE_MOBILE",
+            "sAreaCode": "",
+            "sCountryCode": "+91",
+            "sPhoneNumber": "",
+            "sExt": ""
+          },
+          {
+            "sPhoneType": "RESIDENCE_PHONE",
+            "sAreaCode": "",
+            "sCountryCode": "+91",
+            "sPhoneNumber": "",
+            "sExt": ""
+          },
+          {
+            "sPhoneType": "OFFICE_PHONE",
+            "sAreaCode": "",
+            "sCountryCode": "+91",
+            "sPhoneNumber": "",
+            "sExt": ""
+          }
+        ],
+        "aEmail": [
+          {
+            "sEmailType": "PERSONAL",
+            "sEmailAddr": "asfasasdf12asdf@gmail.com",
+            "bVerified": true
+          },
+          {
+            "sEmailType": "PERMANENT",
+            "bVerified": false
+          },
+          {
+            "sEmailType": "WORK",
+            "bVerified": false
+          }
+        ],
+        "aEmpl": [
+          {
+            "iTmWithEmplr": 0,
+            "dmonthSal": 21000,
+            "dGrossSal": 0,
+            "aLastMonthIncome": [],
+            "dItrAmt": 0,
+            "iTotalExps": 0,
+            "dOtherGrossIncome": 0,
+            "dRetirementAge": 0,
+            "sEmplName": "ASDF ASDFA"
+          },{
+            "iTmWithEmplr": 0,
+            "dmonthSal": 1000,
+            "dGrossSal": 0,
+            "aLastMonthIncome": [],
+            "dItrAmt": 0,
+            "iTotalExps": 0,
+            "dOtherGrossIncome": 0,
+            "dRetirementAge": 0,
+            "sEmplName": "ASDF ASDFA"
+          }
+        ],
+        "iNoOfDep": 0,
+        "iEarnMem": 0,
+        "iFamilyMem": 0,
+        "bMobVer": true,
+        "bAdharVer": false,
+        "bEmailVerified": true,
+        "bEmailVerificationSkip": false,
+        "bEmailOtpStatus": true,
+        "bIsAadhaarDetailsSameAsExisting": false,
+        "bConsentToCall": false,
+        "bBookAndWait": false,
+        "bResiCumOffice": false,
+        "oBankingAnalyticDetails": {},
+        "bIsKarzaKycSkipped": false,
+        "bConsentToKyc": true,
+        "bOtherKyc": true,
+        "sLoginUsingOtherKyc": "Y",
+        "bIsIdeaOtp": false,
+        "sCurrentAddressSameAs": "EXISTING",
+        "oSurrogate": {},
+        "sLoyaltyCardNumber": "",
+        "sExistingCustId": "5cc7f644377fe511eb389f23",
+        "oExistingAnalyticDetails": {
+          "sExistingAadharNameChanged": "YES",
+          "sExistingAadharNameMatchPer": "0",
+          "sExistingAadharAddressMatchPer": "0",
+          "sExistingAadharPincodeChange": "Yes",
+          "sExistingAadharDobChange": "Yes",
+          "sExistingAadharGenderChange": "Yes",
+          "sExistingCurrentNameMatchPer": "100",
+          "sExistingCurrentFirstNameMatchChanged": "No",
+          "sExistingCurrentLastNameMatchChanged": "No",
+          "sExistingCurrentFirstNameMatchPer": "100",
+          "sExistingCurrentLastNameMatchPer": "100",
+          "sExistingCurrentDobChange": "No",
+          "sExistingCurrentAddressMatchPer": "99",
+          "sExistingCurrentCityChange": "No",
+          "sExistingCurrentCityMatchPer": "100",
+          "sExistingCurrentPincodeChange": "No",
+          "sExistingCurrentMobileNumberChange": "No"
+        },
+        "oBureauPhoneNumbersMatch": {
+          "sOtpMobileNumberMatch": "Matched",
+          "sOfficeMobileNumberMatch": "Not Matched",
+          "sResidenceMobileNumberMatch": "Not Matched",
+          "sOfficeLandlineNumberMatch": "Not Matched",
+          "sResidenceLandlineNumberMatch": "Not Matched",
+          "sBureauProduct": "Others",
+          "sBureauName": "CIBIL"
+        },
+        "oBureauAnalyticDetails": {
+          "bureauApplicantNameMatch": "100",
+          "bureauApplicantDobMatch": "Matched"
+        }
+      },
+      "oApplication": {
+        "sLoanType": "Consumer Durables",
+        "dLoanAmt": 16000,
+        "iLoanTenor": 10,
+        "dLnApr": 0,
+        "dEmi": 0,
+        "iAdvEmi": 0,
+        "dDedupeEmiPaid": 0,
+        "iDedupeTenor": 0,
+        "dMarginAmt": 0,
+        "aAssetDetail": [
+          {
+            "sDlrName": "DIGI 1 SNEHANJALI RET P L MURBAD RD"
+          }
+        ],
+        "bTermsConditionAgreement": false,
+        "bDNDAgrrement": false,
+        "dPreApprovedAmt": 13000
+      }
+    },
+    "sCurrentStageId": "BRE",
+    "iDealerRank": 333,
+    "sAlphaNumDealerRank": "CG",
+    "oAppMetaData": {
+      "oNBranch": {
+        "iInstId": 4045,
+        "iBranchId": 1457,
+        "sBranchName": "MUMBAI-SF"
+      },
+      "oDsaName": {
+        "sFirstName": "WERTY",
+        "sLastName": "HGFDSA"
+      },
+      "oDsaEmailId": {
+        "bVerified": false,
+        "sEmailType": "WORK"
+      },
+      "oPhone": {
+        "sPhoneNumber": "9876543210",
+        "sPhoneType": "PERSONAL_MOBILE"
+      },
+      "oSourcingDetails": {
+        "oS1": {
+          "sUniqueId": "5cc7d477716fad1f4e447773",
+          "sBranchId": "0",
+          "sMakerId": "TEST69246",
+          "dtMakeDate": 1539737807000,
+          "sAuthId": "TEST50730",
+          "dtAuthDate": 1539740458000,
+          "sModuleId": "LEA",
+          "sKey1": "SOURCE",
+          "sKey2": "",
+          "sValue": "TEST92587",
+          "sDescription": "ADSASFSADF ADSFA ASDFAS",
+          "sStatus": "A",
+          "sModuleFlag": "0",
+          "sAppFlag": "0",
+          "sDisableFlag": "Y",
+          "dtCgpStartDate": 1539628200000,
+          "dtCgpEndDate": 2170780200000,
+          "sMApplyFlag": "",
+          "sInstitutionId": "4045",
+          "dtInsertDate": 1556599899793
+        },
+        "aS2": [
+          {
+            "sUniqueId": "5cc7d477716fad1f4e45189f",
+            "sBranchId": "0",
+            "sMakerId": "TEST75332",
+            "dtMakeDate": 1556068279000,
+            "sAuthId": "TEST55412",
+            "dtAuthDate": 1556069408000,
+            "sModuleId": "LEA",
+            "sKey1": "SOURCEID",
+            "sKey2": "TEST92587",
+            "sValue": "TEST83584",
+            "sDescription": "ADAF ASDFA ASDFS",
+            "sStatus": "A",
+            "sModuleFlag": "0",
+            "sAppFlag": "0",
+            "sDisableFlag": "Y",
+            "dtCgpStartDate": 1556044200000,
+            "dtCgpEndDate": 2187196200000,
+            "sMApplyFlag": "",
+            "sInstitutionId": "4045",
+            "dtInsertDate": 1556599901939
+          }
+        ],
+        "oS3": {
+          "sUniqueId": "5cc7d477716fad1f4e455a72",
+          "sBranchId": "0",
+          "sMakerId": "TEST75332",
+          "dtMakeDate": 1554353329000,
+          "sAuthId": "TEST55412",
+          "dtAuthDate": 1554355363000,
+          "sModuleId": "LEA",
+          "sKey1": "VALIDSRC",
+          "sKey2": "TEST92587",
+          "sValue": "TEST86635",
+          "sDescription": "A ASDFAS ASFAS ASDF",
+          "sStatus": "A",
+          "sModuleFlag": "0",
+          "sAppFlag": "0",
+          "sDisableFlag": "Y",
+          "dtCgpStartDate": 1554229800000,
+          "dtCgpEndDate": 2185381800000,
+          "sMApplyFlag": "",
+          "sInstitutionId": "4045",
+          "dtInsertDate": 1556599902785
+        },
+        "oS4": {
+          "sUniqueId": "5cc7d477716fad1f4e449cd0",
+          "sBranchId": "0",
+          "sMakerId": "TEST69246",
+          "dtMakeDate": 1530760408000,
+          "sAuthId": "TEST73046",
+          "dtAuthDate": 1530760719000,
+          "sModuleId": "LEA",
+          "sKey1": "SOURCEID",
+          "sKey2": "TEST86635",
+          "sValue": "TEST80890",
+          "sDescription": "SASDFAS ASDSDF ASDFG",
+          "sStatus": "A",
+          "sModuleFlag": "0",
+          "sAppFlag": "0",
+          "sDisableFlag": "Y",
+          "dtCgpStartDate": 1530729000000,
+          "dtCgpEndDate": 2161881000000,
+          "sMApplyFlag": "",
+          "sInstitutionId": "4045",
+          "dtInsertDate": 1556599901267
+        }
+      }
+    },
+    "sApplicantType": "EXISTING",
+    "bQdeDecision": true,
+    "sCntrlId": "9ddf10a388624eb4bcf36df7d38026342019043012490545",
+    "bIsManualBre": false,
+    "bKarzaFlag": false
+  },
+  "WORKFLOW_FIELDS": {
+    "AADHAAR_VERIFY_STATUS": "false",
+    "AADHAAR_GONOGO_VERIFY_STATUS": "NOT_AUTHORIZED",
+    "PAN_NAME_VERIFY_SCORE": "100",
+    "PAN_VERIFY_STATUS": "EXIST",
+    "DEDUPE_CUSTOMER_FLAG": "Y",
+    "DEDUPE_CUSTOMER_STATUS": "N",
+    "POSIDEX_DEDUPE_STATUS": "NOT_FOUND",
+    "DEDUPE_CUSTOMER_ELG_LOAN_AMT": 0,
+    "NEG_PINCODE_CHECK": "N",
+    "RESI_VERIFY_SCORE": "66.67",
+    "RESI_VERIFY_SCORE_STATUS": "Not Match",
+    "ADDR_VERIFY_SCORE": "0",
+    "ADDR_VERIFY_SCORE_STATUS": "Not Match",
+    "RESI_VERIFY_SCORE_STABILITY": 87,
+    "ADDR_VERIFY_SCORE_STABILITY": 0,
+    "OTP_STATUS": "Y",
+    "SUBMIT_DATE": "30042019",
+    "EMAIL_ID_STATUS": "Y",
+    "EMAIL_ID_SKIP_STATUS": "N",
+    "EMAIL_ID_RESPONSE_STATUS": "SUCCESS"
+  },
+  "GNG_MASTER_FIELDS": {
+    "karzaKycSkipped": false,
+    "aadharKycSkipped": false,
+    "SUPP_MAST_DEALER_STATE_ID": "1",
+    "SUPP_MAST_DEALER_CITY_ID": "18277",
+    "SUPP_BRANCH_MAST_BRANCH_ID": "1457",
+    "KARZA_DL_ADDRESS_MATCH_SCORE": 0,
+    "KARZA_DL_NAME_MATCH_SCORE": 0,
+    "KARZA_VOTER_ID_ADDRESS_MATCH_SCORE": 0,
+    "KARZA_VOTER_ID_NAME_MATCH_SCORE": 0,
+    "KARZA_PAN_NAME_MATCH_SCORE": 0,
+    "KARZA_ELECTRICITY_BILL_ADDRESS_MATCH_SCORE": 0,
+    "KARZA_ELECTRICITY_BILL_NAME_MATCH_SCORE": 0,
+    "KARZA_ELECTRICITY_BILL_DOB_MATCH": false,
+    "IS_KARZA_KYC_SKIPPED": false,
+    "IS_AADHAR_KYC_SKIPPED": false,
+    "ADDRESS_DISTANCE_VALID": false
+  },
+  "GNG_RESPONSE_FIELDS": {
+    "oIntrmStat": {
+      "dtStart": 1556608746099,
+      "sAppStart": "DEFAULT",
+      "sDedupe": "DEFAULT",
+      "sPosidexDedupeStat": "DEFAULT",
+      "sEmailStat": "DEFAULT",
+      "sOtpStat": "COMPLETE",
+      "sAppStat": "VERIFIED",
+      "sPanStat": "COMPLETE",
+      "sAadharStat": "UNAUTHORISED",
+      "sMbStat": "COMPLETE",
+      "sCreditVidyaStat": "DEFAULT",
+      "sSaathiPullStat": "DEFAULT",
+      "sVarScoreStat": "COMPLETE",
+      "sScoreStat": "DEFAULT",
+      "sCblScore": "COMPLETE",
+      "sExperianStat": "DEFAULT",
+      "sHighmarkStat": "DEFAULT",
+      "sCroStat": "DEFAULT",
+      "sNtcStatus": "NOT_APPLICABLE",
+      "oPanResult": {
+        "sFldName": "PAN Verification",
+        "iOrder": 4,
+        "sFldVal": "ESADFS ADFAFSD QWERTY",
+        "sMsg": "EXIST",
+        "iAddrStblty": 0,
+        "fNameScore": "100"
+      },
+      "oCibilResult": {
+        "sFldName": "CIBIL Score",
+        "iOrder": 3,
+        "sFldVal": "00781",
+        "sMsg": "SUCCESS",
+        "iAddrStblty": 0
+      },
+      "oResAddressResult": {
+        "sFldName": "Residential Address Score",
+        "iOrder": 1,
+        "sFldVal": "66.67",
+        "sMsg": "Not Match",
+        "iAddrStblty": 87
+      },
+      "oOffAddressResult": {
+        "sFldName": "Office Address Score",
+        "iOrder": 2,
+        "sFldVal": "0",
+        "sMsg": "Not Match",
+        "iAddrStblty": 0
+      },
+      "oScoringResult": {
+        "sFldName": "Application Score",
+        "iOrder": 5,
+        "iAddrStblty": 0
+      },
+      "oAadharResult": {
+        "sFldName": "AADHAR Verification",
+        "iOrder": 7,
+        "sFldVal": "NOT_AUTHORIZED",
+        "sMsg": "NOT_AUTHORIZED",
+        "iAddrStblty": 0
+      },
+      "oExperianResult": {
+        "sFldName": "Experian Score",
+        "iOrder": 6,
+        "sFldVal": "NO RESPONSE",
+        "sMsg": "No Score",
+        "iAddrStblty": 0
+      },
+      "oCHMResult": {
+        "sFldName": "Highmark Score",
+        "iOrder": 12,
+        "sFldVal": "NO RESPONSE",
+        "sMsg": "No Score",
+        "iAddrStblty": 0
+      },
+      "sKarzaPanStat": "DEFAULT",
+      "skarzaVoterIdStat": "DEFAULT",
+      "sKarzaDlStat": "DEFAULT"
+    },
+    "sApplicationBREType": "QDE_DETAILS_BRE"
+  },
+  "sInterfaceName": "SCORING REQUEST",
+  "CIBIL_RESPONSE": {
+    "addressList": [
+      {
+        "pinCode": "400708",
+        "dateReported": "11082015",
+        "stateCode": "27",
+        "addressLine5": "NAVI MUMBAI",
+        "addressLine4": "ADSAFSDFSD FGHASDF ADSJKFASDF",
+        "addressLine3": "INDUSTRIAL ESTATE ASFASF",
+        "residenceCode": "02",
+        "addressCategory": "03",
+        "addressLine2": "PLOT NO 6 TTC",
+        "addressLine1": "HT MEDIA LTD"
+      },
+      {
+        "pinCode": "421301",
+        "dateReported": "11082015",
+        "stateCode": "27",
+        "addressLine4": "ASFASF HO",
+        "addressLine3": ",NR ASDFASN ASDFA ASDFASDF W ,",
+        "residenceCode": "02",
+        "addressCategory": "02",
+        "addressLine2": "ASFASDF ASSDFASDF ASDFASDF DSFASLYAN W,",
+        "addressLine1": "A-123 ASDFASD SADFAS  ROAD"
+      }
+    ],
+    "enquiryList": [
+      {
+        "dateReported": "30042019",
+        "enquiryPurpose": "06",
+        "enquiryAmount": "15500",
+        "reportingMemberShortName": "NOT DISCLOSED"
+      },
+      {
+        "dateReported": "12102018",
+        "enquiryPurpose": "06",
+        "enquiryAmount": "30000",
+        "reportingMemberShortName": "TEST"
+      },
+      {
+        "dateReported": "12102018",
+        "enquiryPurpose": "06",
+        "enquiryAmount": "22639",
+        "reportingMemberShortName": "TEST BANK"
+      },
+      {
+        "dateReported": "12102018",
+        "enquiryPurpose": "06",
+        "enquiryAmount": "120000",
+        "reportingMemberShortName": "TEST BANK"
+      },
+      {
+        "dateReported": "30062017",
+        "enquiryPurpose": "06",
+        "enquiryAmount": "120000",
+        "reportingMemberShortName": "TEST BANK"
+      },
+      {
+        "dateReported": "11082015",
+        "enquiryPurpose": "10",
+        "enquiryAmount": "100000",
+        "reportingMemberShortName": "NOT DISCLOSED"
+      },
+      {
+        "dateReported": "16122011",
+        "enquiryPurpose": "02",
+        "enquiryAmount": "980000",
+        "reportingMemberShortName": "NOT DISCLOSED"
+      },
+      {
+        "dateReported": "28092011",
+        "enquiryPurpose": "02",
+        "enquiryAmount": "1000000",
+        "reportingMemberShortName": "NOT DISCLOSED"
+      }
+    ],
+    "accountList": [
+      {
+        "paymentHistoryEndDate": "01042016",
+        "highCreditOrSanctionedAmount": "980000",
+        "dateReportedAndCertified": "31032019",
+        "accountType": "02",
+        "ownershipIndicator": "1",
+        "paymentHistory2": "060060060060030000000030000030060030030000030000060030",
+        "dateOfLastPayment": "18022019",
+        "currentBalance": "859904",
+        "overdueAmount": "11150",
+        "paymentHistoryStartDate": "01032019",
+        "paymentHistory1": "030000030060030030030000059029000060060060060060060060",
+        "reportingMemberShortName": "NOT DISCLOSED",
+        "dateOpenedOrDisbursed": "26122011"
+      },
+      {
+        "accountNumber": "5561785",
+        "paymentHistoryEndDate": "01112018",
+        "highCreditOrSanctionedAmount": "27200",
+        "dateReportedAndCertified": "31032019",
+        "accountType": "06",
+        "ownershipIndicator": "1",
+        "dateOfLastPayment": "05032019",
+        "currentBalance": "21152",
+        "paymentHistoryStartDate": "01032019",
+        "paymentHistory1": "000000XXX000000",
+        "reportingMemberShortName": "TEST",
+        "dateOpenedOrDisbursed": "10112018"
+      },
+      {
+        "accountNumber": "0004815080000838721",
+        "paymentHistoryEndDate": "01072017",
+        "highCreditOrSanctionedAmount": "2916",
+        "dateReportedAndCertified": "30092018",
+        "accountType": "06",
+        "ownershipIndicator": "1",
+        "dateOfLastPayment": "05042018",
+        "currentBalance": "0",
+        "paymentHistoryStartDate": "01092018",
+        "dateClosed": "04062018",
+        "paymentHistory1": "000000000000000000000000000000000000000000000",
+        "reportingMemberShortName": "TEST BANK",
+        "dateOpenedOrDisbursed": "10072017"
+      }
+    ],
+    "phoneList": [
+      {
+        "telephoneNumber": "1234567890",
+        "telephoneType": "03",
+        "enrichEnquiryForPhone": "Y"
+      }
+    ],
+    "name": {
+      "dob": "28091983",
+      "gender": "2",
+      "name1": "ESADFS BASAVRAJASDFASDF"
+    },
+    "idList": [
+      {
+        "idType": "01",
+        "idValue": "QWE123456"
+      }
+    ],
+    "employmentList": [
+      {
+        "dateReported": "30092018",
+        "accountType": "06",
+        "occupationCode": "04"
+      }
+    ],
+    "header": {
+      "dateProceed": "30042019",
+      "subjectReturnCode": "1",
+      "memberReferenceNumber": "131582425",
+      "enquiryControlNumber": "123456789",
+      "serialversionuid": 1,
+      "enquiryMemberUserID": "ASFASDFS_56SDF",
+      "timeProceed": "124906",
+      "version": "12"
+    },
+    "scoreList": [
+      {
+        "reasonCode2": "11",
+        "score": "00781",
+        "reasonCode1": "09",
+        "reasonCode3": "15",
+        "scoreCardVersion": "10",
+        "scoreDate": "30042019",
+        "scoreName": "ASFASDF",
+        "scoreCardName": "01"
+      }
+    ]
+  }
+}

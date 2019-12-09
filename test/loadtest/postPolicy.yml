@@ -1,0 +1,18 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 15
+      arrivalRate: 20
+  processor: "./data.js"
+scenarios:
+  - flow:
+    - post:
+        url: "/executePolicy"
+        beforeRequest: "setJSONBody"
+        afterResponse: "logHeaders"
+        #json:
+        #  name: "world1234"
+        capture:
+          json: "$"
+          as: "response"
+    - log: "{{ response }}" 

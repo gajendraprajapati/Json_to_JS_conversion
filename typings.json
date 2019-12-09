@@ -1,0 +1,10 @@
+{
+  "globalDependencies": {
+    "node": "registry:dt/node#6.0.0+20161110151007",
+    "q": "registry:dt/q#0.0.0+20161004185634",
+    "winston": "registry:dt/winston#0.0.0+20161108133445"
+  },
+  "dependencies": {
+    "linq": "registry:npm/linq#3.0.5+20160322032703"
+  }
+}

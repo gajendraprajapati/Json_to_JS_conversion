@@ -1,0 +1,150 @@
+[
+    {
+        "isCoApplcntEarning": {
+            "parameter": [
+                "coApplicantObject"
+            ],
+            "body": "let coAppEarning = false;\n    if (coApplicantObject && coApplicantObject.bEarning) {\n        let bEarning = coApplicantObject && coApplicantObject.bEarning;\n        if(bEarning.toUpperCase() == \"YES\"){\n            coAppEarning = true\n        }\n    }\n    return coAppEarning;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_salariedGrossIncome": {
+            "parameter": ["_", "loanReqObj"],
+            "body": " let salariedGrossIncome = 0;\n    let employmentType = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.aEmpl[0].sEmplType\", \"\");\n    let modeOfPayment = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.aEmpl[0].sModePayment\", \"\");\n    if (employmentType.toUpperCase() === \"SALARIED\") {\n        salariedGrossIncome = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.oIncomeDetails.oSalriedDtl.dGrssIncm\", 0);\n    } else {\n        let sepSenpArray = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.oIncomeDetails.aSenpPflIncm\", []);\n        let netProfit = 0;\n        //Consider 2 years income in case of Regular ITR filing.\n        let consideredYearsCount = 2;\n        //Consider 1 year's income in case of Assessed Income.\n        if (modeOfPayment.toUpperCase() === \"ASSESSED INCOME\") {\n            consideredYearsCount = 1;\n        }\n        for (let i = 0; i < sepSenpArray.length; i++) {\n            let sepSenpArr = sepSenpArray[i];\n\n            netProfit += Number(sepSenpArr && sepSenpArr.dNtPrfit);\n\n            //Break if count reached consideredYearsCount.\n            if (i == consideredYearsCount)\n                break;\n        }\n        if (modeOfPayment.toUpperCase() === \"ASSESSED INCOME\") {\n            salariedGrossIncome = netProfit;\n        } else {\n            salariedGrossIncome = ((netProfit) / consideredYearsCount) / 12;\n        }\n\n        let requestObject = loanReqObj && loanReqObj.REQUEST && loanReqObj.REQUEST.oReq;\n        if (requestObject && requestObject.aCoApplicant && requestObject.aCoApplicant.length && requestObject.aCoApplicant.length > 0) {\n            let coApplicants = requestObject.aCoApplicant;\n\n            for (let i = 0; i < coApplicants.length; i++) {\n\n                let coApplicantObject = coApplicants[i];\n\n                let coAppEarning = global.isCoApplcntEarning(coApplicantObject);\n\n                if (coAppEarning) {\n                    let coApplicantEmplDetails = coApplicantObject.aEmpl[0];\n\n                    let coApplicantIncmDetails = coApplicantObject.oIncomeDetails;\n\n                    let coApplicantEmploymentType = coApplicantEmplDetails.sEmplType;\n\n                    let coApplicantModeOfPayment = coApplicantEmplDetails.sModePayment;\n\n                    if (coApplicantEmploymentType.toUpperCase() === \"SALARIED\") {\n                        let coApplicantGrossSal = _.get(coApplicantIncmDetails, \"oSalriedDtl.dGrssIncm\", 0);\n                        salariedGrossIncome += coApplicantGrossSal;\n\n                    } else {\n                        let coAppSepArray = coApplicantIncmDetails.aSenpPflIncm;\n\n                        let netProfit = 0;\n                        let consideredYearsCount = 2;\n                        if (coApplicantModeOfPayment.toUpperCase() === \"ASSESSED INCOME\") {\n                            consideredYearsCount = 1;\n                        }\n\n                        for (let j = 0; j < coAppSepArray.length; j++) {\n                            netProfit += coAppSepArray[j].dNtPrfit\n                            if (j == consideredYearsCount)\n                                break;\n                        }\n\n                        let coApplicantNetSepIncm = 0;\n                        if (coApplicantModeOfPayment.toUpperCase() === \"ASSESSED INCOME\") {\n                            coApplicantNetSepIncm = netProfit;\n                        } else {\n                            coApplicantNetSepIncm = ((netProfit) / consideredYearsCount) / 12;\n                        }\n\n                        salariedGrossIncome += coApplicantNetSepIncm;\n                    }\n                }\n            }\n        }\n    }\n    return salariedGrossIncome;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_incentive": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "let incentive = 0;\n    let employmentType = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.aEmpl[0].sEmplType\", \"\");\n    if (employmentType.toUpperCase() === \"SALARIED\") {\n        incentive = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.oIncomeDetails.oSalriedDtl.dInctv\", 0);\n    }\n    let requestObject = loanReqObj && loanReqObj.REQUEST && loanReqObj.REQUEST.oReq;\n    if (requestObject && requestObject.aCoApplicant && requestObject.aCoApplicant.length > 0) {\n        let coApplicants = requestObject.aCoApplicant;\n\n        for (let i = 0; i < coApplicants.length; i++) {\n            let coApplicantObject = coApplicants[i];\n            let coAppEarning = global.isCoApplcntEarning(coApplicantObject);\n            let coApplicantEmploymentType = _.get(coApplicantObject,\"aEmpl[0].sEmplType\", \"\");\n            if (coAppEarning) {\n                if (coApplicantEmploymentType.toUpperCase() === \"SALARIED\") {\n\n                    let coApplicantObject = coApplicants[i];\n                    let coApplicantIncmDetails = coApplicantObject.oIncomeDetails;\n                    let coAppIncentive = _.get(coApplicantIncmDetails, \"oSalriedDtl.dInctv\", 0);\n                    incentive += coAppIncentive;\n\n                }\n            }\n        }\n    }\n    return incentive;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_deduction": {
+            "parameter": ["_", "loanReqObj"],
+            "body": " let deduction = 0;\n    let employmentType = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.aEmpl[0].sEmplType\", \"\");\n\n    if (employmentType.toUpperCase() === \"SALARIED\") {\n        deduction = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.oIncomeDetails.oSalriedDtl.dPF\", 0);\n        deduction += Number(_.get(loanReqObj, \"REQUEST.oReq.oApplicant.oIncomeDetails.oSalriedDtl.dPrfTax\", 0));\n        deduction += Number(_.get(loanReqObj, \"REQUEST.oReq.oApplicant.oIncomeDetails.oSalriedDtl.dLIC\", 0));\n        deduction += Number(_.get(loanReqObj, \"REQUEST.oReq.oApplicant.oIncomeDetails.oSalriedDtl.dESI\", 0));\n        deduction += Number(_.get(loanReqObj, \"REQUEST.oReq.oApplicant.oIncomeDetails.oSalriedDtl.dOthrDdctn\", 0));\n    }\n    let requestObject = loanReqObj && loanReqObj.REQUEST && loanReqObj.REQUEST.oReq;\n    if (requestObject && requestObject.aCoApplicant && requestObject.aCoApplicant.length > 0) {\n        let coApplicants = requestObject.aCoApplicant;\n        for (let i = 0; i < coApplicants.length; i++) {\n            let coApplicantObject = coApplicants[i];\n            let coAppEarning = global.isCoApplcntEarning(coApplicantObject);\n            let coApplicantEmploymentType = _.get( coApplicantObject, \"aEmpl[0].sEmplType\", \"\");\n            if (coAppEarning) {\n                if (coApplicantEmploymentType.toUpperCase() === \"SALARIED\") {\n                    let coApplicantObject = coApplicants[i];\n                    let coApplicantIncmDetails = coApplicantObject.oIncomeDetails;\n                    let coAppdeduction = Number(_.get(coApplicantIncmDetails, \"oSalriedDtl.dPF\", 0));\n                    coAppdeduction += Number(_.get(coApplicantIncmDetails, \"oSalriedDtl.dPrfTax\", 0));\n                    coAppdeduction += Number(_.get(coApplicantIncmDetails, \"oSalriedDtl.dLIC\", 0));\n                    coAppdeduction += Number(_.get(coApplicantIncmDetails, \"oSalriedDtl.dESI\", 0));\n                    coAppdeduction += Number(_.get(coApplicantIncmDetails, \"oSalriedDtl.dOthrDdctn\", 0));\n                    deduction += coAppdeduction;\n                }\n            }\n        }\n    }\n    return deduction;"
+        }
+    },
+    {
+        "getLiabilitiesFromLoanDetails": {
+            "parameter": [
+                "loanDetails"
+            ],
+            "body": "let emiSum = 0;\n    if (loanDetails) {\n\n        for (let i = 0; i < loanDetails.length; i++) {\n\n            let loanDetail = loanDetails[i];\n\n            let obligate = loanDetail.sOblgt;\n\n            if (loanDetail != null && obligate.toUpperCase() === \"YES\") {\n                emiSum += loanDetail.dEmiAmt || 0;\n            }\n        }\n    }\n    return emiSum;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_existingEmi": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "let loanDetails = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.aLoanDetails\", []);\n    let existingEmi = global.getLiabilitiesFromLoanDetails(loanDetails);\n    let requestObject = loanReqObj && loanReqObj.REQUEST && loanReqObj.REQUEST.oReq;\n    if (requestObject && requestObject.aCoApplicant && requestObject.aCoApplicant.length > 0) {\n        let coApplicants = requestObject.aCoApplicant;\n\n        for (let i = 0; i < coApplicants.length; i++) {\n\n            let coApplicantObject = coApplicants[i];\n            let coAppEarning = global.isCoApplcntEarning(coApplicantObject);\n            if (coAppEarning) {\n                let coAppLoanDetails = coApplicantObject.aLoanDetails;\n                existingEmi += global.getLiabilitiesFromLoanDetails(coAppLoanDetails);\n\n            }\n\n        }\n    }\n    return existingEmi;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_houseHoldExpense": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "let houseHoldExpense = Number(_.get(loanReqObj, \"REQUEST.oReq.oApplicant.oIncomeDetails.oSalriedDtl.dObligtn\", 0));\n    return houseHoldExpense;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_otherIncome": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "let otherIncome = 0;\n    let employmentType = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.aEmpl[0].sEmplType\", \"\");\n    if (employmentType.toUpperCase() === \"SALARIED\") {\n        otherIncome = Number(_.get(loanReqObj, \"REQUEST.oReq.oApplicant.oIncomeDetails.oSalriedDtl.dOthr\"));\n    }\n    let requestObject = loanReqObj && loanReqObj.REQUEST && loanReqObj.REQUEST.oReq;\n    if (requestObject && requestObject.aCoApplicant && requestObject.aCoApplicant.length > 0) {\n        let coApplicants = requestObject.aCoApplicant;\n        for (let i = 0; i < coApplicants.length; i++) {\n            let coApplicantObject = coApplicants[i];\n            let coAppEarning = global.isCoApplcntEarning(coApplicantObject);\n            if (coAppEarning) {\n                let coApplicantIncmDetails = coApplicantObject.oIncomeDetails;\n                let coApplicantEmploymentType = _.get(coApplicantObject, \"aEmpl[0].coApplicantObject.aEmpl[0].sEmplType\",\"\");\n                if (coApplicantEmploymentType.toUpperCase() === \"SALARIED\") {\n                    let coAppOtherIncome = _.get(coApplicantIncmDetails, \"oSalriedDtl.dOthr\", 0);\n                    otherIncome += coAppOtherIncome;\n                }\n            }\n        }\n    }\n    return otherIncome;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_totalConsiderIncome": {
+            "parameter": ["_", "loanReqObj"],
+            "body": " let considerVariableIncome = 0;\n    let totalConsiderIncome = global.salariedGrossIncome(_,loanReqObj) + considerVariableIncome;\n    return totalConsiderIncome;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_netConsiderIncome": {
+            "parameter": ["_", "loanReqObj"],
+            "body": " let netConsiderIncome; \n netConsiderIncome = global.totalConsiderIncome(_,loanReqObj) - global.deduction(_,loanReqObj);\n return netConsiderIncome;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_netEstimatedIncome": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "  let netEstimatedIncome;\n netEstimatedIncome = global.netConsiderIncome(_,loanReqObj) - global.houseHoldExpense(_,loanReqObj);\n return netEstimatedIncome;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_finalEstimatedIncome": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "let finalEstimatedIncome;\n finalEstimatedIncome = global.netEstimatedIncome(_,loanReqObj) - global.existingEmi(_,loanReqObj);\n return finalEstimatedIncome;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_mobileMatchCivil": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "let isMobileMatched = null;\n    const requestList = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.aPhone\", []);\n    const cibilList = _.get(loanReqObj, \"CIBIL_RESPONSE.phoneList\", []);\n\n   requestList.length>0 && requestList.forEach((curList) => {\n        if (curList.sPhoneType.toUpperCase() == \"PERSONAL_MOBILE\") {\n            const requestMobile = curList && curList.sPhoneNumber;\n            if (requestMobile && requestMobile.length>0) {\n                const cibilFilter = _.filter(cibilList, (curCibil) => {\n                    if ((requestMobile.includes(curCibil.telephoneNumber) || curCibil.telephoneNumber.includes(requestMobile)) && _.isEmpty(curCibil.enrichEnquiryForPhone)) {\n                        return true;\n                    }\n                });\n\n                if (cibilFilter.length > 0) {\n                    isMobileMatched = true;\n                }\n\n            }\n\n        }\n\n    });\n    return isMobileMatched;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_maxMob": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "let maxMob = 0;\n    let acctAge = 0;\n    const cibilResAccountListArr = _.get(loanReqObj, \"CIBIL_RESPONSE.accountList\", []);\n    cibilResAccountListArr.length > 0 && cibilResAccountListArr.forEach((curAccount) => {\n        let highCredit = 0;\n        if (!_.isEmpty(curAccount.highCreditOrSanctionedAmount)) {\n            highCredit = curAccount.highCreditOrSanctionedAmount;\n        }\n        if (!_.isEmpty(curAccount)) {\n            acctAge = _.dateDiffMonthExact(_.stringToDate(_.get(loanReqObj, \"CIBIL_RESPONSE.header.dateProceed\",\"\"), \"DDMMYYYY\"), _.stringToDate(curAccount.dateOpenedOrDisbursed, \"DDMMYYYY\"));\n            if (acctAge > maxMob && highCredit > 100000) {\n                maxMob = acctAge;\n            }\n\n        }\n    });\n    return maxMob;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_aadharMatchCibil": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "let aadharMatch = null;\n    const sKycNumberArray = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.aKycDocs\", []);\n    const cibilIdListarray = _.get(loanReqObj, \"CIBIL_RESPONSE.idList\", []);\n    let gngAadhaar = null;\n    if (sKycNumberArray.length > 0 && cibilIdListarray.length > 0) {\n        sKycNumberArray.forEach((curNum) => {\n            if (curNum.sKycName && \"AADHAAR\" == curNum.sKycName.toUpperCase()) {\n                gngAadhaar = curNum.sKycNumber;\n            }\n        });\n        cibilIdListarray.forEach((curCibil) => {\n            if ( curCibil.idType && \"06\" == curCibil.idType.toUpperCase() && gngAadhaar !=null) {\n                if (curCibil.idValue && curCibil.idValue.toUpperCase() == gngAadhaar.toUpperCase()) {\n                    aadharMatch = true;\n\n                } else {\n                    aadharMatch = false;\n                }\n            }\n        });\n    }\n    return aadharMatch;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_aadharMatchCibilEnrich": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "  const sKycNumberArray = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.aKycDocs\", []);\n    const cibilIdListarray = _.get(loanReqObj, \"CIBIL_RESPONSE.idList\", []);\n    let gngAadhaar = null;\n    let aadharMatchEnrich = null;\n    if (sKycNumberArray.length > 0 && cibilIdListarray.length > 0) {\n        sKycNumberArray.forEach((curNum) => {\n            if ( curNum.sKycName && \"AADHAAR\" == curNum.sKycName.toUpperCase()) {\n                gngAadhaar = curNum.sKycNumber;\n            }\n        });\n        cibilIdListarray.forEach((curCibil) => {\n            if (curCibil.enrichedThroughtEnquiry && \"Y\" == curCibil.enrichedThroughtEnquiry.toUpperCase()) {\n                if (curCibil.idValue.toUpperCase() == gngAadhaar.toUpperCase()) {\n                    aadharMatchEnrich = true;\n                } else {\n                    aadharMatchEnrich = false;\n                }\n            }\n        });\n    }\n    return aadharMatchEnrich;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_panMatch": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "const sKycNumberArray = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.aKycDocs\", []);\n    const cibilIdListarray = _.get(loanReqObj, \"CIBIL_RESPONSE.idList\", []);\n    let gngPan = null;\n    let panMatch = null;\n    if (sKycNumberArray.length > 0 && cibilIdListarray.length > 0) {\n        sKycNumberArray.forEach((curNum) => {\n            if (\"PAN\" == curNum.sKycName.toUpperCase()) {\n                gngPan = curNum.sKycNumber;\n            }\n        });\n        cibilIdListarray.forEach((curCibil) => {\n            if (\"01\" == curCibil.idType.toUpperCase() && !_.isEmpty(gngPan)) {\n                if (curCibil.idValue.toUpperCase() == gngPan.toUpperCase()) {\n                    panMatch = true;\n                } else {\n                    panMatch = false;\n                }\n            }\n        });\n    }\n    return panMatch;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_panMatchEnrich": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "const sKycNumberArray = _.get(loanReqObj, \"REQUEST.oReq.oApplicant.aKycDocs\", []);\n    const cibilIdListarray = _.get(loanReqObj, \"CIBIL_RESPONSE.idList\", []);\n    let gngPan = null;\n    let panMatchEnrich = null;\n    if (sKycNumberArray.length > 0 && cibilIdListarray.length > 0) {\n        sKycNumberArray.forEach((curNum) => {\n            if (\"PAN\" == curNum.sKycName.toUpperCase()) {\n                gngPan = curNum.sKycNumber;\n            }\n        });\n        cibilIdListarray.forEach((curCibil) => {\n            if (\"01\" == curCibil.idType.toUpperCase() && !_.isEmpty(gngPan) && \n            curCibil.enrichedThroughtEnquiry && curCibil.enrichedThroughtEnquiry.toUpperCase() == \"Y\") {\n\n                if (curCibil.idValue.toUpperCase() == gngPan.toUpperCase()) {\n                    panMatchEnrich = true;\n                } else {\n                    panMatchEnrich = false;\n                }\n            }\n        });\n    }\n    return panMatchEnrich;"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_product": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "return _.get(loanReqObj, \"REQUEST.oReq.oApplication.oProperty.sPropertyName\", \"\");"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_marketValue": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "return _.get(loanReqObj, \"REQUEST.oReq.oApplicant.oProperty.sMarketValue\", \"\");"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_applicantAge": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "return _.get(loanReqObj, \"REQUEST.oReq.oApplicant.iAge\", \"\");"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_applicantLoanTenure": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "return  _.get(loanReqObj, \"REQUEST.oReq.oApplication.iLoanTenor\", \"\");"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_affordableEmiByCustomer": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "return _.get(loanReqObj, \"REQUEST.oReq.oApplication.dEmi\", \"\");"
+        }
+    },
+    {
+        "WORKFLOWFIELDS_agreementValue": {
+            "parameter": ["_", "loanReqObj"],
+            "body": "return _.get(loanReqObj, \"REQUEST.oReq.oApplication.oProperty.sPropertyValue\", \"\");"
+        }
+    }
+]

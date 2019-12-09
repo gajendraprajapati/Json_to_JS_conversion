@@ -1,0 +1,67 @@
+{
+  "UUID": 1,
+  "template": "FOR_EACH",
+  "expressions": [
+    {
+      "UUID": 2,
+      "template": "STATEMENT",
+      "operator": "=",
+      "operands": [
+        {
+          "operand": "abs",
+          "operandType": "field",
+          "operandDataType": "string"
+        },
+        {
+          "UUID": 6,
+          "template": "IF_COND",
+          "outputAlias": {
+            "trueCase": true,
+            "falseCase": false
+          },
+          "expression": {
+            "UUID": 3,
+            "template": "STATEMENT",
+            "operator": "&&",
+            "operands": [
+              {
+                "UUID": 4,
+                "template": "NUMBER_OPERATION",
+                "operator": ">=",
+                "operands": [
+                  {
+                    "operand": "loanReqObj.REQUEST.oReq.oApplication.dLoanAmt",
+                    "operandType": "field",
+                    "operandDataType": "number"
+                  },
+                  {
+                    "operand": 50000,
+                    "operandType": "value",
+                    "operandDataType": "number"
+                  }
+                ]
+              },
+              {
+                "UUID": 5,
+                "template": "STRING_OPERATION",
+                "operator": "isStrEqual",
+                "operands": [
+                  {
+                    "operand": "loanReqObj.REQUEST.oReq.oApplicant.aAddr.sCity",
+                    "operandType": "field",
+                    "operandDataType": "string"
+                  },
+                  {
+                    "operand": "Pune",
+                    "operandType": "value",
+                    "operandDataType": "string"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

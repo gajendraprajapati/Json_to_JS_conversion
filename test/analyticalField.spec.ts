@@ -1,0 +1,132 @@
+import assert = require("assert");
+import * as fs from "fs";
+import { Config } from "../config";
+import { PolicyModel } from "../src/com/softcell/sobre/models/policyModel";
+import { generate, execute, addWorkflowFields } from "../src/generatePolicyProd";
+const iFFData = JSON.parse(fs.readFileSync(Config.dataDirectoryPath + "/iffData.json", "utf8"));
+const beautify = require("js-beautify").js;
+
+import workflowFieldService from "../src/com/softcell/sobre/services/workflowFieldService";
+
+workflowFieldService.setLocalFilePath(Config.dataDirectoryPath + "/workflowFields/");
+
+
+
+describe("Policy_1", () => {
+    addWorkflowFields();
+    const fileData1 = fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy1.json", "utf-8");
+    const analyticalPolicy = JSON.parse(fileData1);
+    const policy = new PolicyModel(analyticalPolicy, iFFData);
+    const BREJson = policy.generate();
+    const breJS = generate(BREJson);
+    fs.appendFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/brejs.js", breJS, "utf-8");
+    it("generate OutPut_Case_1", () => {
+        const loanReq = JSON.parse(fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy1_Case1_Request.json", "utf-8"));
+        const breOutput = execute(breJS, loanReq);
+        const targetdata = fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy1_Case1_Response.json","utf-8");
+        const SoBREOutput = JSON.parse(targetdata);
+        delete SoBREOutput.HEADER;
+        delete SoBREOutput["SCORING-REF-ID"];
+        delete SoBREOutput.createDate;
+        delete SoBREOutput.STATUS;
+        delete breOutput.HEADER;
+        delete breOutput.STATUS;
+        fs.writeFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/breoutput.json",JSON.stringify(breOutput), "utf-8");
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["RuleID"], breOutput["DECISION_RESPONSE"]["RuleID"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["CriteriaID"], breOutput["DECISION_RESPONSE"]["Details"][0]["CriteriaID"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["RuleName"], breOutput["DECISION_RESPONSE"]["Details"][0]["RuleName"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Exp"].trim(), breOutput["DECISION_RESPONSE"]["Details"][0]["Exp"].trim());
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Outcome"], breOutput["DECISION_RESPONSE"]["Details"][0]["Outcome"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Remark"], breOutput["DECISION_RESPONSE"]["Details"][0]["Remark"]);
+        assert.equal(Number(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Values"]["CHECK_ANALYTIC"]), Number(breOutput["DECISION_RESPONSE"]["Details"][0]["Values"]["CHECK_ANALYTIC"]));
+    });
+    it("generate OutPut_Case_2", () => {
+        const loanReq = JSON.parse(fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy1_Case2_Request.json", "utf-8"));
+        const breOutput = execute(breJS, loanReq);
+        const targetdata = fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy1_Case2_Response.json", "utf-8");
+        const SoBREOutput = JSON.parse(targetdata);
+        delete SoBREOutput.HEADER;
+        delete SoBREOutput["SCORING-REF-ID"];
+        delete SoBREOutput.createDate;
+        delete SoBREOutput.STATUS;
+        delete breOutput.HEADER;
+        delete breOutput.STATUS;
+        fs.writeFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/breoutput.json", JSON.stringify(breOutput), "utf-8");
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["RuleID"], breOutput["DECISION_RESPONSE"]["RuleID"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["CriteriaID"], breOutput["DECISION_RESPONSE"]["Details"][0]["CriteriaID"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["RuleName"], breOutput["DECISION_RESPONSE"]["Details"][0]["RuleName"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Exp"].trim(), breOutput["DECISION_RESPONSE"]["Details"][0]["Exp"].trim());
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Outcome"], breOutput["DECISION_RESPONSE"]["Details"][0]["Outcome"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Remark"], breOutput["DECISION_RESPONSE"]["Details"][0]["Remark"]);
+        assert.equal(Number(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Values"]["CHECK_ANALYTIC"]), Number(breOutput["DECISION_RESPONSE"]["Details"][0]["Values"]["CHECK_ANALYTIC"]));
+    });
+    it("generate OutPut_Case_3", () => {
+        const loanReq = JSON.parse(fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy1_Case3_Request.json", "utf-8"));
+        const breOutput = execute(breJS, loanReq);
+        const targetdata = fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy1_Case3_Response.json", "utf-8");
+        const SoBREOutput = JSON.parse(targetdata);
+        delete SoBREOutput.HEADER;
+        delete SoBREOutput["SCORING-REF-ID"];
+        delete SoBREOutput.createDate;
+        delete SoBREOutput.STATUS;
+        delete breOutput.HEADER;
+        delete breOutput.STATUS;
+        fs.writeFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/breoutput.json", JSON.stringify(breOutput), "utf-8");
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["RuleID"], breOutput["DECISION_RESPONSE"]["RuleID"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["CriteriaID"], breOutput["DECISION_RESPONSE"]["Details"][0]["CriteriaID"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["RuleName"], breOutput["DECISION_RESPONSE"]["Details"][0]["RuleName"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Exp"].trim(), breOutput["DECISION_RESPONSE"]["Details"][0]["Exp"].trim());
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Outcome"], breOutput["DECISION_RESPONSE"]["Details"][0]["Outcome"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Remark"], breOutput["DECISION_RESPONSE"]["Details"][0]["Remark"]);
+        assert.equal(Number.isNaN(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Values"]["CHECK_ANALYTIC"]), Number.isNaN(breOutput["DECISION_RESPONSE"]["Details"][0]["Values"]["CHECK_ANALYTIC"]));
+    });
+    it("generate OutPut_Case_4", () => {
+        const loanReq = JSON.parse(fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy1_Case4_Request.json", "utf-8"));
+        const breOutput = execute(breJS, loanReq);
+        const targetdata = fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy1_Case4_Response.json", "utf-8");
+        const SoBREOutput = JSON.parse(targetdata);
+        delete SoBREOutput.HEADER;
+        delete SoBREOutput["SCORING-REF-ID"];
+        delete SoBREOutput.createDate;
+        delete SoBREOutput.STATUS;
+        delete breOutput.HEADER;
+        delete breOutput.STATUS;
+        fs.writeFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/breoutput.json", JSON.stringify(breOutput), "utf-8");
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["RuleID"], breOutput["DECISION_RESPONSE"]["RuleID"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["CriteriaID"], breOutput["DECISION_RESPONSE"]["Details"][0]["CriteriaID"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["RuleName"], breOutput["DECISION_RESPONSE"]["Details"][0]["RuleName"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Exp"].trim(), breOutput["DECISION_RESPONSE"]["Details"][0]["Exp"].trim());
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Outcome"], breOutput["DECISION_RESPONSE"]["Details"][0]["Outcome"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Remark"], breOutput["DECISION_RESPONSE"]["Details"][0]["Remark"]);
+        assert.equal(Number(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Values"]["CHECK_ANALYTIC"]), Number(breOutput["DECISION_RESPONSE"]["Details"][0]["Values"]["CHECK_ANALYTIC"]));
+    });
+});
+describe("Policy_2", () => {
+    addWorkflowFields();
+    const fileData1 = fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy2.json", "utf-8");
+    const analyticalPolicy = JSON.parse(fileData1);
+    const policy = new PolicyModel(analyticalPolicy, iFFData);
+    const BREJson = policy.generate();
+    const breJS = generate(BREJson);
+    fs.appendFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/brejs.js", breJS, "utf-8");
+    it("generate OutPut_Case_1", () => {
+        const loanReq = JSON.parse(fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy2_Case1_Request.json", "utf-8"));
+        const breOutput = execute(breJS, loanReq);
+        const targetdata = fs.readFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/Policy2_Case1_Response.json", "utf-8");
+        const SoBREOutput = JSON.parse(targetdata);
+        delete SoBREOutput.HEADER;
+        delete SoBREOutput["SCORING-REF-ID"];
+        delete SoBREOutput.createDate;
+        delete SoBREOutput.STATUS;
+        delete breOutput.HEADER;
+        delete breOutput.STATUS;
+        fs.writeFileSync(Config.dataDirectoryPath + "/analyticalFieldsTest/breoutput.json", JSON.stringify(breOutput), "utf-8");
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["RuleID"], breOutput["DECISION_RESPONSE"]["RuleID"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["CriteriaID"], breOutput["DECISION_RESPONSE"]["Details"][0]["CriteriaID"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["RuleName"], breOutput["DECISION_RESPONSE"]["Details"][0]["RuleName"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Exp"].trim(), breOutput["DECISION_RESPONSE"]["Details"][0]["Exp"].trim());
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Outcome"], breOutput["DECISION_RESPONSE"]["Details"][0]["Outcome"]);
+        assert.equal(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Remark"], breOutput["DECISION_RESPONSE"]["Details"][0]["Remark"]);
+        assert.equal(Number.isNaN(SoBREOutput["DECISION_RESPONSE"]["Details"][0]["Values"]["CHECK_ANALYTIC"]), Number.isNaN(breOutput["DECISION_RESPONSE"]["Details"][0]["Values"]["CHECK_ANALYTIC"]));
+    });
+});
